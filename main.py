@@ -5,7 +5,8 @@ from threading import Thread
 import wx
 import obd
 
-import speedmeter
+import meter_Speed
+import meter_RPM
 
 # Init
 #obd_connection = obd.Async()
@@ -15,22 +16,28 @@ import speedmeter
 class MainWindow(wx.Frame):
     def __init__(self, parent, title):
         wx.Frame.__init__(self, parent, title=title, size=(550,550))
-        panel = wx.Panel(self)
-        panel1 = wx.Panel(self)
+        panel = wx.Panel(self, size=(550,550), pos=(0,0))
+        panel1 = wx.Panel(self, size=(550,550), pos=(550,0))
 
         #bind on esc key
         self.Bind(wx.EVT_CHAR_HOOK, self.onKey)
         
         # Eyes burning <remove later>
         panel.SetBackgroundColour(wx.Colour(33,33,33))
+        panel1.SetBackgroundColour(wx.Colour(33,33,33))
 
+        #GridSizer
+        #gs = wx.GridSizer(2,1,5,5)
+        #gs.Add(self.speedmeter = speedmeter.SpeedMeter(panel))
+        #gs.Add(self.speedmeter1 = speedmeter.SpeedMeter(panel1))
+        
         # Start
         #self.btn_start_stop = wx.Button(panel, label="Start")
         #self.btn_start_stop.Bind(wx.EVT_BUTTON, self.OnStartStop)
 
         # Add speedmeter
-        self.speedmeter = speedmeter.SpeedMeter(panel)
-        self.speedmeter = speedmeter.SpeedMeter(panel)
+        self.Speed = meter_Speed.SpeedMeter(panel)
+        self.RPM = meter_RPM.SpeedMeter(panel1)
 		
 		
         self.ShowFullScreen(True)
@@ -64,11 +71,16 @@ class MainWindow(wx.Frame):
 # DEBUG
 def test():
     speed = 0
-    while frame.speedmeter:
-        frame.speedmeter.Set(speed)
+    rpm = 0
+    while True:
+        frame.Speed.Set(speed)
+        frame.RPM.Set(rpm)
         speed += 1
+        rpm += 100
         if speed > 199:
             speed = 0
+        elif rpm > 6000:
+            rpm = 0
         sleep(0.2)
 
 # Entry point

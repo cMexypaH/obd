@@ -15,10 +15,10 @@ class SpeedMeter(SM.SpeedMeter):
                pos=(10, 30))
       
        self.SetAngleRange(-pi/6, 7*pi/6)
-       self.SetMiddleText("Km/h")
+       self.SetMiddleText("RPM")
 
        # Intervals
-       intervals = range(0, 201, 10)
+       intervals = range(0, 6001, 500)
        self.SetIntervals(intervals)
        ticks = [str(i) for i in intervals]
        self.SetTicks(ticks)
@@ -26,8 +26,8 @@ class SpeedMeter(SM.SpeedMeter):
        # Colors
        self.SetTicksColour(wx.WHITE)
        self.SetSpeedBackground(wx.BLACK)
-       interval_colours1 = [wx.BLACK]*(len(intervals)-1)
-       interval_colours = [wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.RED, wx.RED]
+       interval_colours = [wx.BLACK]*(len(intervals)-1)
+       #interval_colours = [wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.RED, wx.RED]
        self.SetIntervalColours(interval_colours)
        self.SetHandColour(wx.Colour(255,50,0))
        self.SetMiddleTextColour(wx.WHITE)
