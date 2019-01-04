@@ -1,72 +1,47 @@
+#!/usr/bin/env python
+
+from math import pi
+
 import wx
 import wx.lib.agw.speedmeter as SM
-from math import pi, sqrt 
 
-global speed
+class SpeedMeter(SM.SpeedMeter):
 
-class MyFrame(wx.Frame):
-    
-    global speed
-    
-    def __init__(self, parent):
+   def __init__(self, parent):
+       SM.SpeedMeter.__init__(self,
+               parent,
+               agwStyle=SM.SM_DRAW_HAND|SM.SM_DRAW_SECTORS|SM.SM_DRAW_MIDDLE_TEXT|SM.SM_DRAW_SECONDARY_TICKS,
+               size=(300,300),
+               pos=(10, 30))
+      
+       self.SetAngleRange(-pi/6, 7*pi/6)
+       self.SetMiddleText("Km/h")
 
-        wx.Frame.__init__(self, parent, -1, "SpeedMeter Demo")
+       # Intervals
+       intervals = range(0, 201, 10)
+       self.SetIntervals(intervals)
+       ticks = [str(i) for i in intervals]
+       self.SetTicks(ticks)
 
-        speed = SM.SpeedMeter(self, agwStyle=SM.SM_DRAW_HAND|SM.SM_DRAW_SECTORS|SM.SM_DRAW_MIDDLE_TEXT|SM.SM_DRAW_SECONDARY_TICKS)
+       # Colors
+       self.SetTicksColour(wx.WHITE)
+       self.SetSpeedBackground(wx.BLACK)
+       interval_colours = [wx.BLACK]*(len(intervals)-1)
+       self.SetIntervalColours(interval_colours)
+       self.SetHandColour(wx.Colour(255,50,0))
 
-        # Set The Region Of Existence Of SpeedMeter (Always In Radians!!!!)
-        speed.SetAngleRange(-pi/6, 7*pi/6)
+       # Divide in 5 pieces
+       self.SetNumberOfSecondaryTicks(4)
 
-        # Create The Intervals That Will Divide Our SpeedMeter In Sectors
-        intervals = range(0, 201, 10)
-        speed.SetIntervals(intervals)
+       # Fonts
+       self.SetTicksFont(
+               wx.Font(7, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
+       self.SetMiddleTextFont(
+               wx.Font(8, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD))
 
-        # Assign The Same Colours To All Sectors (We Simulate A Car Control For Speed)
-        # Usually This Is Black
-        colours = [wx.BLACK]*20
-        speed.SetIntervalColours(colours)
+       # Remove arc (visible on non-black bg)
+       self.DrawExternalArc(False)
 
-        # Assign The Ticks: Here They Are Simply The String Equivalent Of The Intervals
-        ticks = [str(interval) for interval in intervals]
-        speed.SetTicks(ticks)
-        # Set The Ticks/Tick Markers Colour
-        speed.SetTicksColour(wx.WHITE)
-        # We Want To Draw 5 Secondary Ticks Between The Principal Ticks
-        speed.SetNumberOfSecondaryTicks(4)
-
-        # Set The Font For The Ticks Markers
-        speed.SetTicksFont(wx.Font(7, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
-
-        # Set The Text In The Center Of SpeedMeter
-        speed.SetMiddleText("Km/h")
-        # Assign The Colour To The Center Text
-        speed.SetMiddleTextColour(wx.WHITE)
-        # Assign A Font To The Center Text
-        speed.SetMiddleTextFont(wx.Font(8, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD))
-
-        # Set The Colour For The Hand Indicator
-        speed.SetHandColour(wx.Colour(255, 50, 0))
-
-        # Do Not Draw The External (Container) Arc. Drawing The External Arc May
-        # Sometimes Create Uglier Controls. Try To Comment This Line And See It
-        # For Yourself!
-        #speed.DrawExternalArc(False)
-
-        # Set The Current Value For The SpeedMeter
-        speed.SetSpeedValue(0)
-        
-    def SetSpeed(self,s):
-        self.speed.SetSpeedValue(s)
-
-
-# our normal wxApp-derived class, as usual
-i=0
-app = wx.App(0)
-
-frame = MyFrame(None)
-app.SetTopWindow(frame)
-frame.Show()
-while(i<200):
-    i=i+1
-    frame.SetSpeed(i)
-app.MainLoop()
+   def Set(self, value):
+       self.SetSpeedValue(int(value))
+       self.Refresh()
