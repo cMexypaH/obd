@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from math import pi
+from math import pi, ceil
 
 import wx
 import wx.lib.agw.speedmeter as SM
@@ -26,8 +26,15 @@ class SpeedMeter(SM.SpeedMeter):
        # Colors
        self.SetTicksColour(wx.WHITE)
        self.SetSpeedBackground(wx.BLACK)
-       interval_colours = [wx.BLACK]*(len(intervals)-1)
-       #interval_colours = [wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.RED, wx.RED]
+       
+       # Setting 20% at end to be red coloured
+       length_colours = len(intervals)-1
+       red_colours = ceil(length_colours*20/100)
+       black_colours = length_colours-red_colours
+       red_colours_list = [wx.RED]*(red_colours)
+       interval_colours = [wx.BLACK]*(black_colours)
+       interval_colours.extend(red_colours_list)
+       
        self.SetIntervalColours(interval_colours)
        self.SetHandColour(wx.Colour(255,50,0))
        self.SetMiddleTextColour(wx.WHITE)

@@ -47,13 +47,6 @@ class MainWindow(wx.Frame):
         obd_connection.start()
         print("Started")
         
-    def onKeyPress(self, event):
-        keycode = event.GetKeyCode()
-        print(keycode)
-        if keycode == wx.WXK_SPACE:
-            print("you pressed the spacebar!")
-        event.Skip()
-        
     def onKey(self, event):
         """
         Check for ESC key press and exit is ESC is pressed
