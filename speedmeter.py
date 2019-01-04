@@ -11,7 +11,7 @@ class SpeedMeter(SM.SpeedMeter):
        SM.SpeedMeter.__init__(self,
                parent,
                agwStyle=SM.SM_DRAW_HAND|SM.SM_DRAW_SECTORS|SM.SM_DRAW_MIDDLE_TEXT|SM.SM_DRAW_SECONDARY_TICKS,
-               size=(300,300),
+               size=(500,500),
                pos=(10, 30))
       
        self.SetAngleRange(-pi/6, 7*pi/6)
@@ -29,15 +29,16 @@ class SpeedMeter(SM.SpeedMeter):
        interval_colours = [wx.BLACK]*(len(intervals)-1)
        self.SetIntervalColours(interval_colours)
        self.SetHandColour(wx.Colour(255,50,0))
+       self.SetMiddleTextColour(wx.WHITE)
 
        # Divide in 5 pieces
        self.SetNumberOfSecondaryTicks(4)
 
        # Fonts
        self.SetTicksFont(
-               wx.Font(7, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
+               wx.Font(15, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
        self.SetMiddleTextFont(
-               wx.Font(8, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD))
+               wx.Font(20, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD))
 
        # Remove arc (visible on non-black bg)
        self.DrawExternalArc(False)
