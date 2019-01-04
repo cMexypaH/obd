@@ -10,7 +10,7 @@ class SpeedMeter(SM.SpeedMeter):
    def __init__(self, parent):
        SM.SpeedMeter.__init__(self,
                parent,
-               agwStyle=SM.SM_DRAW_HAND|SM.SM_DRAW_SECTORS|SM.SM_DRAW_MIDDLE_TEXT|SM.SM_DRAW_SECONDARY_TICKS,
+               agwStyle=SM.SM_DRAW_HAND|SM.SM_DRAW_MIDDLE_TEXT|SM.SM_DRAW_SECONDARY_TICKS|SM.SM_DRAW_PARTIAL_SECTORS,
                size=(500,500),
                pos=(10, 30))
       
@@ -26,7 +26,8 @@ class SpeedMeter(SM.SpeedMeter):
        # Colors
        self.SetTicksColour(wx.WHITE)
        self.SetSpeedBackground(wx.BLACK)
-       interval_colours = [wx.BLACK]*(len(intervals)-1)
+       interval_colours1 = [wx.BLACK]*(len(intervals)-1)
+       interval_colours = [wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.BLACK, wx.RED, wx.RED]
        self.SetIntervalColours(interval_colours)
        self.SetHandColour(wx.Colour(255,50,0))
        self.SetMiddleTextColour(wx.WHITE)

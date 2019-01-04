@@ -16,9 +16,10 @@ class MainWindow(wx.Frame):
     def __init__(self, parent, title):
         wx.Frame.__init__(self, parent, title=title, size=(550,550))
         panel = wx.Panel(self)
+        panel1 = wx.Panel(self)
 
         #bind on esc key
-        self.Bind(wx.EVT_KEY_DOWN, self.onKeyPress)
+        self.Bind(wx.EVT_CHAR_HOOK, self.onKey)
         
         # Eyes burning <remove later>
         panel.SetBackgroundColour(wx.Colour(33,33,33))
@@ -29,6 +30,9 @@ class MainWindow(wx.Frame):
 
         # Add speedmeter
         self.speedmeter = speedmeter.SpeedMeter(panel)
+        self.speedmeter = speedmeter.SpeedMeter(panel)
+		
+		
         self.ShowFullScreen(True)
 
     # Start_Stop button
