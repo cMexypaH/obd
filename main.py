@@ -2,20 +2,25 @@
 
 from time import sleep
 from threading import Thread
+from math import ceil
 import wx
 import obd
 
 import meter_Speed
 import meter_RPM
 
+''' Commented for testing
 # Init
-#obd_connection = obd.Async()
+obd_connection = obd.Async("\.\COM4")
 # Callback is called when data is received
-#obd_connection.watch(obd.commands.RPM, callback=None)
-
+obd_connection.watch(obd.commands.RPM)
+obd_connection.watch(obd.commands.SPEED)
+obd_connection.watch(obd.commands.GET_DTC)
+'''
 class MainWindow(wx.Frame):
     def __init__(self, parent, title):
         wx.Frame.__init__(self, parent, title=title, size=(550,550))
+        MainPanel = wx.Panel(self)
         panel = wx.Panel(self, size=(550,550), pos=(0,0))
         panel1 = wx.Panel(self, size=(550,550), pos=(550,0))
 
@@ -31,9 +36,10 @@ class MainWindow(wx.Frame):
         #gs.Add(self.speedmeter = speedmeter.SpeedMeter(panel))
         #gs.Add(self.speedmeter1 = speedmeter.SpeedMeter(panel1))
         
+        
         # Start
-        #self.btn_start_stop = wx.Button(panel, label="Start")
-        #self.btn_start_stop.Bind(wx.EVT_BUTTON, self.OnStartStop)
+        self.btn_start_stop = wx.Button(panel, label="Start")
+        self.btn_start_stop.Bind(wx.EVT_BUTTON, self.OnStartStop)
 
         # Add speedmeter
         self.Speed = meter_Speed.SpeedMeter(panel)
@@ -63,18 +69,34 @@ class MainWindow(wx.Frame):
 
 # DEBUG
 def test():
-    speed = 0
+    kph = 0
     rpm = 0
     while True:
-        frame.Speed.Set(speed)
+        frame.Speed.Set(kph)
         frame.RPM.Set(rpm)
-        speed += 1
-        rpm += 100
-        if speed > 199:
-            speed = 0
-        elif rpm > 6000:
-            rpm = 0
+
         sleep(0.2)
+        '''  Commented for testing
+        obd_connection.stop()
+        value = obd_connection.query(obd.commands.RPM)
+        value_KPH =obd_connection.query(obd.commands.SPEED)
+        rpm = value.value.magnitude  #ne sa testvani
+        kph = value_KPH.magnitude    #ne sa testvani
+        '''
+        ''' Testvano i raboti
+        kph_str=str(value_KPH)
+        if kph_str=="None":
+            kph_str="0"
+        kph=int(kph_str.split()[0])
+        rpm_str=str(value)
+        if rpm_str=="None":
+            rpm_str="0"
+        rpm=ceil(float(rpm_str.split()[0]))
+        '''
+        '''  Commented for testing
+        print(obd_connection.query(obd.commands.GET_DTC))
+        obd_connection.start()
+        '''
 
 # Entry point
 if __name__ == "__main__":
@@ -84,6 +106,7 @@ if __name__ == "__main__":
 
     # DEBUG
     Thread(target=test).start()
+    
 
     # Blocking
     app.MainLoop()
