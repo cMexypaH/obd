@@ -7,12 +7,12 @@ import wx.lib.agw.speedmeter as SM
 
 class SpeedMeter(SM.SpeedMeter):
 
-   def __init__(self, parent):
+   def __init__(self, parent, size1):
        SM.SpeedMeter.__init__(self,
                parent,
                agwStyle=SM.SM_DRAW_HAND|SM.SM_DRAW_MIDDLE_TEXT|SM.SM_DRAW_SECONDARY_TICKS|SM.SM_DRAW_PARTIAL_SECTORS,
-               size=(500,500),
-               pos=(10, 30))
+               size=size1,
+               pos=(0, 0))
       
        self.SetAngleRange(-pi/6, 7*pi/6)
        self.SetMiddleText("RPM")

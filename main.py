@@ -21,29 +21,36 @@ class MainWindow(wx.Frame):
     def __init__(self, parent, title):
         wx.Frame.__init__(self, parent, title=title, size=(550,550))
         MainPanel = wx.Panel(self)
-        panel = wx.Panel(self, size=(550,550), pos=(0,0))
-        panel1 = wx.Panel(self, size=(550,550), pos=(550,0))
+        MainPanel.SetBackgroundColour(wx.Colour(0,0,255))
+        panel = wx.Panel(self, size=(500,500), pos=(50,50))
+        panel1 = wx.Panel(self, size=(500,500), pos=(550,0))
 
         #bind on esc key
         self.Bind(wx.EVT_CHAR_HOOK, self.onKey)
         
         # Eyes burning <remove later>
-        panel.SetBackgroundColour(wx.Colour(33,33,33))
-        panel1.SetBackgroundColour(wx.Colour(33,33,33))
+        panel.SetBackgroundColour(wx.Colour(255,33,33))
+        panel1.SetBackgroundColour(wx.Colour(33,255,33))
 
+
+        box = wx.BoxSizer(wx.VERTICAL)
+        box.Add(panel,1)
+        box.Add(panel1,1)
+        MainPanel.SetSizer(box)
         #GridSizer
         #gs = wx.GridSizer(2,1,5,5)
         #gs.Add(self.speedmeter = speedmeter.SpeedMeter(panel))
         #gs.Add(self.speedmeter1 = speedmeter.SpeedMeter(panel1))
         
-        
+        '''
         # Start
-        self.btn_start_stop = wx.Button(panel, label="Start")
+        self.btn_start_stop = wx.Button(MainPanel, label="Start")
         self.btn_start_stop.Bind(wx.EVT_BUTTON, self.OnStartStop)
-
+        '''
+        
         # Add speedmeter
-        self.Speed = meter_Speed.SpeedMeter(panel)
-        self.RPM = meter_RPM.SpeedMeter(panel1)
+        self.Speed = meter_Speed.SpeedMeter(panel,panel.GetSize())
+        self.RPM = meter_RPM.SpeedMeter(panel1,panel1.GetSize())
 		
 		
         self.ShowFullScreen(True)
