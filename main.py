@@ -22,7 +22,7 @@ class MainWindow(wx.Frame):
         wx.Frame.__init__(self, parent, title=title, size=(550,550))
         MainPanel = wx.Panel(self)
         MainPanel.SetBackgroundColour(wx.Colour(0,0,255))
-        panel = wx.Panel(self, size=(500,500), pos=(50,50))
+        panel = wx.Panel(self, size=(500,500), pos=(0,0))
         panel1 = wx.Panel(self, size=(500,500), pos=(550,0))
 
         #bind on esc key
@@ -34,7 +34,7 @@ class MainWindow(wx.Frame):
 
 
         box = wx.BoxSizer(wx.VERTICAL)
-        box.Add(panel,1)
+        box.Add(panel,0)
         box.Add(panel1,1)
         MainPanel.SetSizer(box)
         #GridSizer

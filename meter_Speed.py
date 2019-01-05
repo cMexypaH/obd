@@ -12,7 +12,7 @@ class SpeedMeter(SM.SpeedMeter):
                parent,
                agwStyle=SM.SM_DRAW_HAND|SM.SM_DRAW_MIDDLE_TEXT|SM.SM_DRAW_SECONDARY_TICKS|SM.SM_DRAW_PARTIAL_SECTORS,
                size=size,
-               pos=(10, 30))
+               pos=(0, 0))
       
        self.SetAngleRange(-pi/6, 7*pi/6)
        self.SetMiddleText("Km/h")
