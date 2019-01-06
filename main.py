@@ -8,6 +8,12 @@ import obd
 
 import meter_Speed
 import meter_RPM
+import meter_Fuel
+import meter_Temp
+
+
+#DisplaySize = wx.GetDisplaySize()
+
 
 ''' Commented for testing
 # Init
@@ -19,23 +25,26 @@ obd_connection.watch(obd.commands.GET_DTC)
 '''
 class MainWindow(wx.Frame):
     def __init__(self, parent, title):
-        wx.Frame.__init__(self, parent, title=title, size=(550,550))
-        MainPanel = wx.Panel(self)
+        wx.Frame.__init__(self, parent, title=title, size=wx.GetDisplaySize())
+        MainPanel = wx.Panel(self, size=self.GetSize())
         MainPanel.SetBackgroundColour(wx.Colour(0,0,255))
-        panel = wx.Panel(self, size=(500,500), pos=(0,0))
-        panel1 = wx.Panel(self, size=(500,500), pos=(550,0))
+        
+        panel_KPH = wx.Panel(self, size=(500,500), pos=(0,0))
+        panel_RPM = wx.Panel(self, size=(500,500), pos=(500,0))
+        panel_Fuel = wx.Panel(self, size=(250,250), pos=(1000,0))
+        panel_Temp = wx.Panel(self, size=(250,250), pos=(1000,250))
 
         #bind on esc key
         self.Bind(wx.EVT_CHAR_HOOK, self.onKey)
         
         # Eyes burning <remove later>
-        panel.SetBackgroundColour(wx.Colour(255,33,33))
-        panel1.SetBackgroundColour(wx.Colour(33,255,33))
+        panel_KPH.SetBackgroundColour(wx.Colour(255,33,33))
+        panel_RPM.SetBackgroundColour(wx.Colour(33,255,33))
 
 
         box = wx.BoxSizer(wx.VERTICAL)
-        box.Add(panel,0)
-        box.Add(panel1,1)
+        box.Add(panel_KPH,0)
+        box.Add(panel_RPM,1)
         MainPanel.SetSizer(box)
         #GridSizer
         #gs = wx.GridSizer(2,1,5,5)
@@ -49,9 +58,10 @@ class MainWindow(wx.Frame):
         '''
         
         # Add speedmeter
-        self.Speed = meter_Speed.SpeedMeter(panel,panel.GetSize())
-        self.RPM = meter_RPM.SpeedMeter(panel1,panel1.GetSize())
-		
+        self.Speed = meter_Speed.SpeedMeter(panel_KPH,panel_KPH.GetSize())
+        self.RPM = meter_RPM.SpeedMeter(panel_RPM,panel_RPM.GetSize())
+        self.Fuel = meter_Fuel.SpeedMeter(panel_Fuel,panel_Fuel.GetSize())
+        self.Temp = meter_Temp.SpeedMeter(panel_Temp,panel_Temp.GetSize())
 		
         self.ShowFullScreen(True)
 
@@ -110,7 +120,7 @@ if __name__ == "__main__":
     app = wx.App(False)
     frame = MainWindow(None, "Main Window")
     frame.Show()
-
+    
     # DEBUG
     Thread(target=test).start()
     
