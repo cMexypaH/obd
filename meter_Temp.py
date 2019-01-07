@@ -60,6 +60,12 @@ class SpeedMeter(SM.SpeedMeter):
        self.SetSpeedValue(int(60))
 
    def Set(self, value):
-       self.SetSpeedValue(int(value)-60)
+       if value>=120:
+           value1=120
+       if value<=60:
+           value1=60
+       else: 
+           value1=value
+       self.SetSpeedValue(120-int(value1))
        self.SetMiddleText(str(value)+"C°")
        self.Refresh()
