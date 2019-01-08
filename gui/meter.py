@@ -3,20 +3,12 @@
 from math import pi, ceil
 
 import wx
-from wx.lib.agw.speedmeter import\
-    SpeedMeter,\
-    SM_DRAW_HAND,\
-    SM_DRAW_MIDDLE_TEXT,\
-    SM_DRAW_PARTIAL_SECTORS,\
-    SM_DRAW_SECONDARY_TICKS 
+import wx.lib.agw.speedmeter as SM
 
-class Meter(SpeedMeter):
-    def __init__(self, parent, low=0, high=100, step=10, ticks=None):
-        SpeedMeter.__init__(self, parent,\
-                agwStyle=SM_DRAW_HAND|\
-                SM_DRAW_MIDDLE_TEXT|\
-                SM_DRAW_SECONDARY_TICKS|\
-                SM_DRAW_PARTIAL_SECTORS)
+class Meter(SM.SpeedMeter):
+    def __init__(self, parent, low=0, high=100, step=10, ticks=None,size=(500,500)):
+        SM.SpeedMeter.__init__(self, parent, size=size, pos=(0,0),
+                agwStyle=SM.SM_DRAW_HAND|SM.SM_DRAW_MIDDLE_TEXT|SM.SM_DRAW_SECONDARY_TICKS|SM.SM_DRAW_PARTIAL_SECTORS)
 
         # Defaults
         self.SetAngleRange(-pi/6, 7*pi/6)

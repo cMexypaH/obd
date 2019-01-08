@@ -8,8 +8,9 @@ from math import pi
 from meter import Meter
 
 class TempMeter(Meter):
-    def __init__(self, parent):
-        Meter.__init__(self, parent, 0, 60, 15)
+    def __init__(self, parent, size):
+        Meter.__init__(self, parent, 0, 60, 15,
+                size=size)
 
         self.SetAngleRange(-pi/6, 7*pi/6)
         self.SetMiddleText("C°")

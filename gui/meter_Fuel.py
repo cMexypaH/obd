@@ -7,8 +7,9 @@ from math import pi
 from meter import Meter
 
 class FuelMeter(Meter):
-    def __init__(self, parent):
+    def __init__(self, parent, size):
         Meter.__init__(self, parent, 0, 100, 20,
+                size=size,
                 ticks=["F", "", "", "", "", "E"])
 
         self.SetAngleRange(-pi/6, pi/6)
