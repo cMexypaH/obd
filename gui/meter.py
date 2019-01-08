@@ -36,12 +36,12 @@ class Meter(SM.SpeedMeter):
         self.SetNumberOfSecondaryTicks(4)
  
         # Fonts
-        self.font_ticks = wx.Font(15,
+        self.font_ticks = wx.Font(8,
             wx.FONTFAMILY_SWISS,
             wx.FONTSTYLE_NORMAL,
             wx.FONTWEIGHT_NORMAL)
         self.SetTicksFont(self.font_ticks)
-        self.font_mid_text = wx.Font(20,
+        self.font_mid_text = wx.Font(12,
             wx.FONTFAMILY_SWISS,
             wx.FONTSTYLE_NORMAL,
             wx.FONTWEIGHT_BOLD)

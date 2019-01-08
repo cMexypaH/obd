@@ -15,13 +15,13 @@ from meter_Temp import TempMeter
 class MainWindow(wx.Frame):
     def __init__(self, parent, title):
         wx.Frame.__init__(self, parent, title=title, size=wx.GetDisplaySize())
-        MainPanel = wx.Panel(self, size=self.GetSize())
+        MainPanel = wx.Panel(self, size=(800,480))
         MainPanel.SetBackgroundColour(wx.Colour(0,0,255))
         
-        panel_KPH = wx.Panel(self, size=(500,500), pos=(0,0))
-        panel_RPM = wx.Panel(self, size=(500,500), pos=(500,0))
-        panel_Fuel = wx.Panel(self, size=(250,250), pos=(1000,0))
-        panel_Temp = wx.Panel(self, size=(250,250), pos=(1000,250))
+        panel_KPH = wx.Panel(self, size=(300,300), pos=(100,90))
+        panel_RPM = wx.Panel(self, size=(300,300), pos=(400,90))
+        panel_Fuel = wx.Panel(self, size=(100,100), pos=(0,190))
+        panel_Temp = wx.Panel(self, size=(100,100), pos=(700,190))
         
         # Eyes burning <remove later>
         panel_KPH.SetBackgroundColour(wx.Colour(255,33,33))
@@ -37,10 +37,10 @@ class MainWindow(wx.Frame):
         #gs.Add(self.speedmeter1 = speedmeter.SpeedMeter(panel1))
         
         # Add speedmeter
-        self.Speed = SpeedMeter(panel_KPH, size=(500,500))
-        self.RPM = RPMMeter(panel_RPM, size=(500,500))
-        self.Fuel = FuelMeter(panel_Fuel, size=(250,250))
-        self.Temp = TempMeter(panel_Temp, size=(250,250))
+        self.Speed = SpeedMeter(panel_KPH, panel_KPH.GetSize())
+        self.RPM = RPMMeter(panel_RPM, panel_RPM.GetSize())
+        self.Fuel = FuelMeter(panel_Fuel, panel_Fuel.GetSize())
+        self.Temp = TempMeter(panel_Temp, panel_Temp.GetSize())
 		
         self.ShowFullScreen(True)
 

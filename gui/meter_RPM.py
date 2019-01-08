@@ -20,6 +20,6 @@ class RPMMeter(Meter):
         self.SetSpeedValue(10)
 
     def Set(self, response):
-        print("RPM: ", response)
+        #print("RPM: ", response)
         self.SetSpeedValue(response)
 

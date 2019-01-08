@@ -13,14 +13,14 @@ class SpeedMeter(Meter):
 
         self.SetAngleRange(-pi/6, 7*pi/6)
         self.SetMiddleText("Km/h")
-        self.SetZone(80,100, wx.RED)
+        self.SetZone(180,200, wx.RED)
         self.SetNumberOfSecondaryTicks(4)
 
         # Startup value
         self.SetSpeedValue(10)
 
     def Set(self, response):
-        print("Fuel: ", response)
+        #print("Fuel: ", response)
         #print("FuelMag: ", response.value.magnitude )
-        self.SetSpeedValue(0)
+        self.SetSpeedValue(response)
 

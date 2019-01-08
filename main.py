@@ -45,7 +45,7 @@ def test():
         
         value_KPH = 100
         value_RPM = 2500
-        value_TEMP = 110
+        value_TEMP = 80
         
         '''  Commented for testing
         obd_connection.stop()
