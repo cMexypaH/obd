@@ -6,8 +6,8 @@ import wx
 import wx.lib.agw.speedmeter as SM
 
 class Meter(SM.SpeedMeter):
-    def __init__(self, parent, low=0, high=100, step=10, ticks=None):
-        SM.SpeedMeter.__init__(self, parent,
+    def __init__(self, parent, low=0, high=100, step=10, ticks=None,size=(500,500)):
+        SM.SpeedMeter.__init__(self, parent, size=size, pos=(0,0),
                 agwStyle=SM.SM_DRAW_HAND|SM.SM_DRAW_MIDDLE_TEXT|SM.SM_DRAW_SECONDARY_TICKS|SM.SM_DRAW_PARTIAL_SECTORS)
 
         # Defaults

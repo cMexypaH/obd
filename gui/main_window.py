@@ -37,10 +37,10 @@ class MainWindow(wx.Frame):
         #gs.Add(self.speedmeter1 = speedmeter.SpeedMeter(panel1))
         
         # Add speedmeter
-        self.Speed = SpeedMeter(panel_KPH)
-        self.RPM = RPMMeter(panel_RPM)
-        self.Fuel = FuelMeter(panel_Fuel)
-        self.Temp = TempMeter(panel_Temp)
+        self.Speed = SpeedMeter(panel_KPH, size=(500,500))
+        self.RPM = RPMMeter(panel_RPM, size=(500,500))
+        self.Fuel = FuelMeter(panel_Fuel, size=(250,250))
+        self.Temp = TempMeter(panel_Temp, size=(250,250))
 		
         self.ShowFullScreen(True)
 

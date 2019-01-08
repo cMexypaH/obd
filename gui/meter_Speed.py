@@ -7,8 +7,9 @@ from math import pi
 from meter import Meter
 
 class SpeedMeter(Meter):
-    def __init__(self, parent):
-        Meter.__init__(self, parent, 0, 200, 10)
+    def __init__(self, parent, size):
+        Meter.__init__(self, parent, 0, 200, 10,
+                size=size)
 
         self.SetAngleRange(-pi/6, 7*pi/6)
         self.SetMiddleText("Km/h")

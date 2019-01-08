@@ -7,8 +7,9 @@ from math import pi
 from meter import Meter
 
 class RPMMeter(Meter):
-    def __init__(self, parent):
-        Meter.__init__(self, parent, 0, 6000, 500)
+    def __init__(self, parent, size):
+        Meter.__init__(self, parent, 0, 6000, 500,
+                size=size)
 
         self.SetAngleRange(-pi/6, 7*pi/6)
         self.SetMiddleText("RPM")
