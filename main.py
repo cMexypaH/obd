@@ -18,7 +18,7 @@ from math import ceil
 def test_callback(response):
     print(response)
 
-''' Commented for testing'''
+''' Commented for testing
 # Init
 obd_connection = obd.Async()#"\.\COM4")
 # Callback is called when data is received
@@ -30,7 +30,7 @@ obd_connection.watch(obd.commands.COOLANT_TEMP)
 obd_connection.watch(obd.commands.STATUS, callback=test_callback)
 
 #obd_connection.watch(obd.commands[1][166])
-''''''
+'''
 
 # DEBUG
 def test():
@@ -42,9 +42,12 @@ def test():
         frame.Speed.Set(kph)
         frame.RPM.Set(rpm)
         frame.Temp.Set(temp)
-        sleep(0.2)
         
-        '''  Commented for testing'''
+        value_KPH = 100
+        value_RPM = 2500
+        value_TEMP = 110
+        
+        '''  Commented for testing
         obd_connection.stop()
         value_RPM = obd_connection.query(obd.commands.RPM)
         value_KPH = obd_connection.query(obd.commands.SPEED)
@@ -58,7 +61,7 @@ def test():
         # print("value RPM: "+str(value_RPM.magnitude))
         print("rpm: "+str(rpm))
         #print(supp)
-        ''''''
+        '''
         # Testvano i raboti
         kph_str=str(value_KPH)
         if kph_str=="None":
@@ -72,9 +75,8 @@ def test():
         if temp_str=="None":
             temp_str="0"
         temp=int(temp_str.split()[0])
-        print(temp)
         
-        '''  Commented for testing'''
+        '''  Commented for testing
         print(obd_connection.query(obd.commands.GET_DTC))
         print(obd.commands.has_pid(1, 166))
 
@@ -82,7 +84,7 @@ def test():
         #print("PID " + str(i) + " --- " + str(obd_connection.query(obd.commands[1][i])))
 
         obd_connection.start()
-        ''''''
+        '''
 
 
 # Entry point
