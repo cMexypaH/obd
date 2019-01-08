@@ -15,16 +15,13 @@ from meter_Temp import TempMeter
 class MainWindow(wx.Frame):
     def __init__(self, parent, title):
         wx.Frame.__init__(self, parent, title=title, size=wx.GetDisplaySize())
-        MainPanel = wx.Panel(self, size=(800,600))
+        MainPanel = wx.Panel(self, size=self.GetSize())
         MainPanel.SetBackgroundColour(wx.Colour(0,0,255))
         
         panel_KPH = wx.Panel(self, size=(500,500), pos=(0,0))
         panel_RPM = wx.Panel(self, size=(500,500), pos=(500,0))
         panel_Fuel = wx.Panel(self, size=(250,250), pos=(1000,0))
         panel_Temp = wx.Panel(self, size=(250,250), pos=(1000,250))
-
-        #bind on esc key
-        self.Bind(wx.EVT_CHAR_HOOK, self.OnKey)
         
         # Eyes burning <remove later>
         panel_KPH.SetBackgroundColour(wx.Colour(255,33,33))
@@ -47,6 +44,9 @@ class MainWindow(wx.Frame):
 		
         self.ShowFullScreen(True)
 
+        # Bind OnKey event
+        self.Bind(wx.EVT_CHAR_HOOK, self.OnKey)
+
     def OnKey(self, event):
         key_code = event.GetKeyCode()
 
@@ -60,23 +60,3 @@ class MainWindow(wx.Frame):
     def OnExit(self, event):
         self.Close(True)
 
-def simulate_data(frame):
-    """ TODO: this """
-    while True:
-        frame.Speed.Set(10)
-        frame.RPM.Set(10)
-        frame.Fuel.Set(10)
-        frame.Temp.Set(10)
-        sleep(0.1)
-
-# Test UI only
-if __name__ == "__main__":
-    app = wx.App(False)
-    frame = MainWindow(None, "Main Window")
-    frame.Show()
-
-    # DEBUG
-    Thread(target=simulate_data, args=frame).start()
-
-    # Blocking
-    app.MainLoop()
